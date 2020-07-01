@@ -2,7 +2,7 @@
 """
 Created on Fri Apr 17 13:51:24 2020
 
-@author: grundch
+@author: CKvG
 """
 
 import win32com.client
@@ -17,8 +17,8 @@ email_address = ''
 class Handler_Class(object):
 
     def __init__(self):
-        self.email_address = 'c.grundherr@hm.edu'
-        self.subject_prefix = 'Atto-Mail: '
+        self.email_address = 'yourEmail@provider.edu'
+        self.subject_prefix = 'Prefix of Subject: '
         # First action to do when using the class in the DispatchWithEvents     
         inbox = self.Application.GetNamespace("MAPI").GetDefaultFolder(6)
         messages = inbox.Items
