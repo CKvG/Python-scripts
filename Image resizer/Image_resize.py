@@ -10,9 +10,9 @@ from PIL import Image
 import os
 
 DIR = os.getcwd()
-ALL_FILES = True
 
-if not ALL_FILES: FILESIZE = 102335
+ALL_FILES = True
+if not ALL_FILES: FILESIZE = 102335 
 
 if ALL_FILES:
     files = [f for f in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, f))]
