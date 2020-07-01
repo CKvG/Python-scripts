@@ -7,12 +7,8 @@ Created on Wed Jun  3 10:59:27 2020
 
 import numpy as np
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import axes3d
 from matplotlib import cm
-import pandas
 import scipy.optimize as opt
-from scipy import ndimage
-import glob
 import os
 
 #%% Define consts and functs
@@ -23,20 +19,16 @@ FSIZE = (11. / 2.54, 9. / 2.54)
 CHOP_SIZE = 5 #multiples of sigma
 
 #Pixelsize for beam width calculation
-#   Point grey:3.75
-#   IDS: 5.2
 Pixelsize_x = 3.75
 Pixelsize_y = Pixelsize_x
 
 #%% Load data
-
 DIR = os.getcwd()
-
-filenames = (DIR + "/JL_LTAPO"+ ".png")
-
+filenames = (DIR + "/your_filename"+ ".png")
 
 #%%
 data = plt.imread(filenames)
+
 # get image properties.
 if (len(data.shape)<3):
     imgtype = 0
@@ -46,7 +38,6 @@ else:
     h,w,bpp = np.shape(data)
 
 #%% plot data
-
 plt.figure(1, figsize=FSIZE)
 
 plt.title('Laser reflection image')
@@ -57,8 +48,7 @@ plt.imshow(data, cmap='gray', interpolation = 'bilinear')
 #plt.grid()
 plt.tight_layout()
 
-#%%
-
+#%% Some functions
 def delete_defect_pixel(data, imgtype):
     if imgtype==1:
         pix = data[93, 107, 1]
@@ -141,7 +131,6 @@ def plot3D(data, title, SAVE_FIGURE, legend = False, legenddata=[]):
     X, Y = np.indices(data.shape)
     fig = plt.figure()
     ax = fig.gca(projection='3d')
-    #X, Y, Z = axes3d.get_test_data(0.05)
     ax.plot_surface(X, Y, Z, cmap=cm.coolwarm,
                        linewidth=0, antialiased=False)
     ax.set_title(title)
@@ -194,8 +183,6 @@ def getContour(data, fit, SAVE_FIGURE):
     col_err = err[X_max, :].T
     plt.figure()
     plt.title('Slice through Max in x')
-    #plt.imshow(data, cmap=plt.get_cmap('gray'), vmin=0, vmax=1)
-    #plt.plot(X_max, Y_max, 'rx', markersize=70)
     plt.plot(row, 'k' ,label='slice')
     plt.plot(row_fit, 'r', label = 'fit')
     plt.plot(row_err, 'c', label = 'error')
