@@ -32,7 +32,7 @@ x, y = np.meshgrid(x, y)
 data = (x,y)
 
 #create data
-image_data = twoD_Gaussian(data, 0.38, 518, 621, 154, 153, 0, 0.12)
+image_data = twoD_Gaussian(data, 0.38, 518, 621, 50, 50, 0, 0.12)
 if noisy: image_data = image_data + noise_amp*np.random.normal(size=image_data.shape)
 
 # plot twoD_Gaussian data generated above
@@ -40,6 +40,7 @@ fig = plt.figure(frameon=False, figsize=(12.80, 10.24), dpi=100)
 ax = plt.Axes(fig, [0., 0., 1., 1.])
 ax.set_axis_off()
 fig.add_axes(ax)
-ax.imshow(image_data.reshape(1025,1281), cmap=plt.get_cmap('gray'), vmin=0, vmax=1)
+image = image_data.reshape(1025,1281)
+ax.imshow(image, cmap=plt.get_cmap('gray'), vmin=0, vmax=1)
 
-fig.savefig('Gaussian_Picture.png', cmap=plt.get_cmap('gray'))
+#fig.savefig('Gaussian_Picture.png', cmap=plt.get_cmap('gray'))
